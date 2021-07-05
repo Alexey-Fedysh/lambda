@@ -2,8 +2,8 @@
 #include <vector>
 #include <functional>
 
-
-int SearchElem(const std::vector<int> vect, int key, std::function<bool(int a, int b)>predic) {
+template<typename T>
+T SearchElem(const std::vector<T> vect, T key, std::function<bool(T a, T b)>predic) {
 	for (size_t i = 0; i < vect.size(); i++){
 		if (predic(vect[i], key)) {
 			return vect[i];
@@ -12,7 +12,8 @@ int SearchElem(const std::vector<int> vect, int key, std::function<bool(int a, i
 	return 0;
 }
 
-void SortElem(std::vector<int> &vect, std::function<bool(int a, int b)> predic) {
+template <typename T1>
+void SortElem(std::vector<T1> &vect, std::function<bool(T1 a, T1 b)> predic) {
 	for (size_t i = 0; i < vect.size() - 1; i++) {
 		for (size_t j = i; j < vect.size() - 1; j++) {
 			if (predic(vect[i], vect[j + 1])) {
@@ -32,11 +33,11 @@ int main() {
 		std::cout << itr << " ";
 	}
 	std::cout << std::endl;
-	SortElem(vect, [](int a, int b) {return a > b; });
+	SortElem<int>(vect, [](int a, int b) {return a > b; });
 	for (auto itr : vect) {
 		std::cout << itr << " ";
 	}
 	std::cout << std::endl;
 
-	std::cout << "Search = " << SearchElem(vect, 8, [](int a, int b) {return a == b; }) << std::endl;
+	std::cout << "Search = " << SearchElem<int>(vect, 8, [](int a, int b) {return a == b; }) << std::endl;
 }
