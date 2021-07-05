@@ -54,6 +54,7 @@ int main() {
 	srand((unsigned)time(NULL));
 	std::vector<Point> pointVector;
 	std::vector<int> vect;
+
 	/*for (size_t i = 0; i < 25; i++){
 		vect.push_back(rand() % 50);
 	}
@@ -68,18 +69,20 @@ int main() {
 	std::cout << std::endl;
 
 	std::cout << "Search = " << SearchElem<int>(vect, 8, [](int a, int b) {return a == b; }) << std::endl;*/
+
 	for (size_t i = 0; i < 5; i++) {
 		pointVector.push_back(Point());
 	}
+
 	for (auto itr : pointVector) {
-		std::cout<< " x = " << itr.getX() << " | y = " << itr.getY();
+		std::cout<< " x = " << itr.getX() << " | y = " << itr.getY() << std::endl;
 	}
-	std::cout << std::endl;
+
+	std::cout << std::endl << "======================================" << std::endl;
 	SortElem<Point>(pointVector, [](Point a, Point b) {return a > b; });
 	for (auto itr : pointVector) {
-		std::cout << " x = " << itr.getX() << " | y = " << itr.getY();
+		std::cout << " x = " << itr.getX() << " | y = " << itr.getY() <<std::endl;
 	}
-	std::cout << std::endl;
 
 	Point randPoint;
 	std::cout << "Search random point" << randPoint << std::endl;
