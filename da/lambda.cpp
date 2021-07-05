@@ -3,7 +3,7 @@
 #include <functional>
 
 
-int SearchElem(std::vector<int> vect, int key, std::function<bool(int a, int b)>predic) {
+int SearchElem(const std::vector<int> vect, int key, std::function<bool(int a, int b)>predic) {
 	for (size_t i = 0; i < vect.size(); i++){
 		if (predic(vect[i], key)) {
 			return vect[i];
@@ -12,16 +12,31 @@ int SearchElem(std::vector<int> vect, int key, std::function<bool(int a, int b)>
 	return 0;
 }
 
-
-bool isEqual(int a, int b) {
-	return a == b;
+void SortElem(std::vector<int> &vect, std::function<bool(int a, int b)> predic) {
+	for (size_t i = 0; i < vect.size() - 1; i++) {
+		for (size_t j = i; j < vect.size() - 1; j++) {
+			if (predic(vect[i], vect[j + 1])) {
+				std::swap(vect[i], vect[j + 1]);
+			}
+		}
+	}
 }
 
 int main() {
+	srand((unsigned)time(NULL));
 	std::vector<int> vect;
-	for (size_t i = 0; i < 10; i++){
-		vect.push_back(i);
+	for (size_t i = 0; i < 25; i++){
+		vect.push_back(rand() % 50);
 	}
-	
-	std::cout << SearchElem(vect, 3, [](int a, int b) {return a == b; }) << std::endl;
+	for (auto itr : vect) {
+		std::cout << itr << " ";
+	}
+	std::cout << std::endl;
+	SortElem(vect, [](int a, int b) {return a > b; });
+	for (auto itr : vect) {
+		std::cout << itr << " ";
+	}
+	std::cout << std::endl;
+
+	std::cout << "Search = " << SearchElem(vect, 8, [](int a, int b) {return a == b; }) << std::endl;
 }
